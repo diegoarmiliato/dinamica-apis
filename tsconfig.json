@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2017",                          
+    "target": "es2020",                          
     "module": "commonjs",                     
-    "lib": ["es6"],                             
+    "lib": ["es6"],                              
     "allowJs": true,                       
     "outDir": "./dist",                        
     "rootDir": "./src",                       
@@ -21,7 +21,6 @@
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
       "@models/*": ["./src/models/*"],
-      "@views/*": ["./src/views/*"],
       "@config/*": ["./src/config/*"]
     }
   },

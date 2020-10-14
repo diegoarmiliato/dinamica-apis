@@ -1,13 +1,13 @@
 {
   "name": "node-setup",
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "Diego Fernandes <diego.schell.f@gmail.com>",
+  "main": "server.js",
+  "author": "Diego Armiliato <diegoarmiliato@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --watch --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
+    "build": "del-cli ./dist && babel src --watch --extensions \".ts,.tsx,.js\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "nodemon dist/server.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules --no-notify src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules --no-notify src/server.ts",
     "test": "jest"
   },
   "devDependencies": {
@@ -18,25 +18,27 @@
     "@babel/preset-typescript": "^7.10.1",
     "@types/express": "^4.17.6",
     "@types/jest": "^26.0.0",
-    "@typescript-eslint/eslint-plugin": "^3.3.0",
-    "@typescript-eslint/parser": "^3.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "eslint": "^7.3.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
+    "del-cli": "^3.0.1",
+    "eslint": "^7.10.0",
+    "eslint-plugin-react": "^7.21.2",
     "jest": "^26.0.1",
-    "prettier": "^2.0.5",
+    "nodemon": "^2.0.4",
     "ts-jest": "^26.1.0",
     "ts-node-dev": "^1.0.0-pre.49",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cookie-session": "^2.0.41",
+    "activedirectory": "^0.7.2",
+    "ad": "^0.3.2",
+    "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   }
 }

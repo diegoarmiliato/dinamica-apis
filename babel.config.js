@@ -8,7 +8,7 @@ module.exports = {
         }
       }
     ],
-    '@babel/preset-typescript'
+    '@babel/preset-typescript',
   ],
   plugins: [
     ['module-resolver', {
@@ -23,4 +23,4 @@ module.exports = {
   ignore: [
     '**/*.spec.ts'
   ]
-}
+};
