@@ -5,8 +5,8 @@
   "author": "Diego Armiliato <diegoarmiliato@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "del-cli ./dist && babel src --watch --extensions \".ts,.tsx,.js\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "nodemon dist/server.js",
+    "build": "del-cli ./dist && babel src --extensions \".ts,.tsx,.js\" --out-dir dist --copy-files --no-copy-ignored",
+    "start": "node dist/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules --no-notify src/server.ts",
     "test": "jest"
   },
