@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import '@controllers/UsersController';
 import routes from './routes';
+import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -24,10 +25,20 @@ app.use(cookieSession({
   maxAge: 5 * 1000 * 60 //24 hours
 }));
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+const whiteList = process.env.CORS;
+
+const corsOptionsDelegate = function (req, callback) {
+  let corsOptions;
+  const reqOrigin = req.get('origin');
+  if (whiteList.indexOf(reqOrigin) !== -1) {
+    corsOptions = { origin: reqOrigin,  credentials: true }; // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false,  credentials: true }; // disable CORS for this request
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options
+};
+
+app.use(cors(corsOptionsDelegate));
 
 app.use(routes);
 
@@ -35,6 +46,12 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
   const error: unknown = new Error('Page not Found');
   error['status'] = 404;
   next(error);
+});
+
+app.use((error: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  error['status'] = error['status'] || 500;
+  res.status(error['status']);
+  res.json({ error: error['message'] });
 });
 
 const privateKey  = fs.readFileSync(path.resolve(__dirname,'..','cert','key.pem'), 'utf8');
