@@ -10,10 +10,8 @@ export const Authenticate = async (username: string, password: string) : Promise
     const auth = await ad.user(username).authenticate(password);
     //
     if (auth) {
-      result = {
-        message: username,
-        status: true
-      };
+      result.message = username,
+      result.status = true;
     } else {
       result.message = 'Invalid username password';
     }
