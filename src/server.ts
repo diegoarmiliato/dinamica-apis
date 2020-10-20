@@ -20,8 +20,9 @@ app.use(cookieParser());
 app.use(cookieSession({
   name: 'session',
   keys: [process.env.SECRET],
-  secure: false,
-  httpOnly: true,
+  secure: true,
+  httpOnly: false,
+  sameSite: 'none',
   maxAge: 5 * 1000 * 60 //24 hours
 }));
 
