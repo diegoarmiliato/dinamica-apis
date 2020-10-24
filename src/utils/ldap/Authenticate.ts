@@ -1,19 +1,20 @@
-import { Result } from '@models/Result';
+import { Login } from '@models/Login';
 import ad from './Connect';
 
-export const Authenticate = async (username: string, password: string) : Promise<Result> => {
-  const result: Result = {
-    message: '',
+export const Authenticate = async (username: string, password: string) : Promise<Login> => {
+  const result: Login = {
     status: false
   };
   try {
     const auth = await ad.user(username).authenticate(password);
     //
     if (auth) {
-      result.message = username,
+      const res = await ad.user(username).get({ fields: ['givenName', 'sn']});
+      console.log(res);
+      result.username = username,
       result.status = true;
     } else {
-      result.message = 'Invalid username password';
+      result.message = 'Nome de usuário ou senha inválido';
     }
   } catch (err) {
     result.message = err;
