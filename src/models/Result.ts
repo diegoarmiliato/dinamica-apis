@@ -1,4 +1,4 @@
 export class Result {
-    message: string[];
+    message: string;
     status: boolean;
 }
