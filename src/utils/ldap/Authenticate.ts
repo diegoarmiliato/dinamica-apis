@@ -10,8 +10,10 @@ export const Authenticate = async (username: string, password: string) : Promise
     //
     if (auth) {
       const res = await ad.user(username).get({ fields: ['givenName', 'sn']});
-      console.log(res);
+      result.firstName = res.givenName;
+      result.lastName = res.sn;
       result.username = username,
+      result.message = 'Logon feito com sucesso';
       result.status = true;
     } else {
       result.message = 'Nome de usuário ou senha inválido';
