@@ -1,16 +1,14 @@
-import { addUser } from './controllers/AddUserController';
 import express from 'express';
-import { login } from '@controllers/LoginController';
+import { addUser } from './controllers/AddUserController';
+import { login, logoff } from '@controllers/LoginController';
 import { listUsers } from '@controllers/ListUsersController';
 
 const routes = express.Router();
 
 routes
-  .get('/', (req, res) => { res.send({ status: 'OK' }); })
   .post('/login', login)
+  .post('/logoff', logoff)
   .get('/listUsers', listUsers)
-  .post('/addUser', addUser)
-  .get('/welcome', (req, res) => { res.render('Login'); })
-  .get('/login');
+  .put('/addUser', addUser);
 
 export default routes;

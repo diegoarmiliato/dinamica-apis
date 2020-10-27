@@ -1,3 +1,4 @@
+import { Result } from './../models/Result';
 import { Authenticate } from './../utils/ldap/Authenticate';
 import { Request, Response, NextFunction } from 'express';
 import { Login } from '@models/Login';
@@ -9,6 +10,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) : P
         username: req.session.username,
         firstName: req.session.firstName,
         lastName: req.session.lastName,
+        orgUnit: req.session.orgUnit,
         message: 'Login ativo',
         status: true
       };
@@ -32,6 +34,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) : P
           req.session.username = auth.username;
           req.session.firstName = auth.firstName;
           req.session.lastName = auth.lastName;
+          req.session.orgUnit = auth.orgUnit;
           req.session.active = true;
         } else {
           req.session = null;
@@ -42,4 +45,13 @@ export const login = async (req: Request, res: Response, next: NextFunction) : P
   } catch (error) {
     next(error);
   }
+};
+
+export const logoff = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
+  req.session = null;
+  const result: Result = {
+    message: 'Logoff realizado',
+    status: true
+  };
+  res.json(result);
 };

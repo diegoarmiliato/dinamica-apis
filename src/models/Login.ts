@@ -3,5 +3,6 @@ export class Login {
     username?: string;
     firstName?: string;
     lastName?: string;
+    orgUnit?: string;
     status: boolean;
 }
