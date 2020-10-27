@@ -7,7 +7,7 @@ export const listUser = async () : Promise<ListUser> => {
     status: false
   };
   try {
-    const query = await ad.user().get({fields: ['sAMAccountName','givenName','sn','groups']});
+    const query = await ad.user().get({fields: ['sAMAccountName','givenName','sn','groups', 'userAccountControl']});
     //    
     if (query) {
       //
@@ -18,11 +18,12 @@ export const listUser = async () : Promise<ListUser> => {
           const result: User = {
             username: line.sAMAccountName,
             firstName: line.givenName,
-            lastname: line.sn,
+            lastName: line.sn,
             groups: line.groups.map((group) => {
               return group.cn;
             }),
-            orgUnit: ou
+            orgUnit: ou,
+            active: line.userAccountControl === 514 ? false : true
           };
           return result;
         }));

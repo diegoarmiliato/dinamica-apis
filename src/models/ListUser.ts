@@ -1,9 +1,10 @@
 export class User {
   username?: string;
   firstName?: string;
-  lastname?: string;
+  lastName?: string;
   groups?: string[];
   orgUnit?: string;
+  active?: boolean;
 }
 
 export class ListUser {
