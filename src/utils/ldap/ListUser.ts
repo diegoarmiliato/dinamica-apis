@@ -23,7 +23,7 @@ export const listUser = async () : Promise<ListUser> => {
               return group.cn;
             }),
             orgUnit: ou,
-            active: line.userAccountControl === 514 ? false : true
+            active: line.userAccountControl == 514 ? false : true
           };
           return result;
         }));
