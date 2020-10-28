@@ -1,8 +1,8 @@
-import { ListUser, User } from '@models/ListUser';
+import { Users, User } from '@models/Users';
 import ad from './Connect';
 
-export const listUser = async () : Promise<ListUser> => {  
-  const result: ListUser = {
+export const listUser = async () : Promise<Users> => {  
+  const result: Users = {
     message: '',
     status: false
   };

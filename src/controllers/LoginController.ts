@@ -3,7 +3,7 @@ import { Authenticate } from './../utils/ldap/Authenticate';
 import { Request, Response, NextFunction } from 'express';
 import { Login } from '@models/Login';
 
-export const login = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
+export const postLogin = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
   try {
     if (req.session.active) {
       const result: Login = {
@@ -47,7 +47,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) : P
   }
 };
 
-export const logoff = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
+export const postLogoff = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
   req.session = null;
   const result: Result = {
     message: 'Logoff realizado',

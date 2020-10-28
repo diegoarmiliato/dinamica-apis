@@ -1,14 +1,14 @@
 import express from 'express';
-import { addUser } from './controllers/AddUserController';
-import { login, logoff } from '@controllers/LoginController';
-import { listUsers } from '@controllers/ListUsersController';
+import { postLogin, postLogoff } from '@controllers/LoginController';
+import { getUsers, addUsers, lockUsers } from '@controllers/UsersController';
 
 const routes = express.Router();
 
 routes
-  .post('/login', login)
-  .post('/logoff', logoff)
-  .get('/listUsers', listUsers)
-  .put('/addUser', addUser);
+  .post('/login', postLogin)
+  .post('/logoff', postLogoff)
+  .get('/users', getUsers)
+  .post('/users',addUsers)
+  .put('/users', lockUsers);
 
 export default routes;

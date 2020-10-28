@@ -1,7 +1,7 @@
 import { Result } from '@models/Result';
 import ad from './Connect';
 
-export const AddUser = async (username: string, password: string, firstName: string, lastName: string, orgUnit: string, mailDomain: string) : Promise<Result> => {
+export const addUser = async (username: string, password: string, firstName: string, lastName: string, orgUnit: string, mailDomain: string) : Promise<Result> => {
   const result: Result = {
     message: '',
     status: false

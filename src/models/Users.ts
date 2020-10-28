@@ -7,7 +7,7 @@ export class User {
   active?: boolean;
 }
 
-export class ListUser {
+export class Users {
   userList?: User[];
   message: string;
   status: boolean;
