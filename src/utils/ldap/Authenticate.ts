@@ -1,7 +1,9 @@
 import { Login } from '@models/Login';
-import ad from './Connect';
+import Connect from './Connect';
 
 export const Authenticate = async (username: string, password: string) : Promise<Login> => {
+  const connect = new Connect();
+  const { ad } = connect;
   const result: Login = {
     status: false
   };

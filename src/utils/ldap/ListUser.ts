@@ -1,7 +1,9 @@
 import { Users, User } from '@models/Users';
-import ad from './Connect';
+import Connect from './Connect';
 
 export const listUser = async () : Promise<Users> => {  
+  const connect = new Connect();
+  const { ad } = connect;
   const result: Users = {
     message: '',
     status: false
@@ -14,6 +16,9 @@ export const listUser = async () : Promise<Users> => {
       const getData = async () => {
         return Promise.all(query.map( async (line) => {
           const ou = await ad.user(line.sAMAccountName).location();
+          if (line.sAMAccountName === '1234') {
+            console.log(line.userAccountControl);
+          }
           //
           const result: User = {
             username: line.sAMAccountName,
