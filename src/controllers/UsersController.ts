@@ -1,6 +1,7 @@
 import { lockUser } from './../utils/ldap/LockUser';
 import { addUser } from './../utils/ldap/AddUser';
 import { listUser } from '../utils/ldap/ListUser';
+import { changeUserPass } from '../utils/ldap/ChangeUserPass';
 import { Request, Response, NextFunction } from 'express';
 
 export const getUsers = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
@@ -59,6 +60,23 @@ export const lockUsers = async (req: Request, res: Response, next: NextFunction)
     if (req.session.active) {
       const { username, active } = req.body;
       const lock = await lockUser(username, active);      
+      res.json(lock);
+    } else {
+      res.json({
+        message: 'Favor realizar o logon, usuário não autenticado',
+        status: false
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const changeUsersPass = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
+  try {
+    if (req.session.active) {
+      const { username, newPassword } = req.body;
+      const lock = await changeUserPass(username, newPassword);      
       res.json(lock);
     } else {
       res.json({
