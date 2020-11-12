@@ -4,7 +4,6 @@ import express from 'express';
 import https from 'https';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
-import '@controllers/UsersController';
 import routes from './routes';
 import cors from 'cors';
 import dotenv from 'dotenv';
