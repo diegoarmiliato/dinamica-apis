@@ -9,17 +9,20 @@ export const listUser = async () : Promise<Users> => {
     status: false
   };
   try {
-    const query = await ad.user().get({fields: ['sAMAccountName','givenName','sn','groups', 'userAccountControl']});
+    const query = await ad.user().get({fields: ['sAMAccountName','givenName','sn','groups', 'userAccountControl', 'lockoutTime']});
     //    
     if (query) {
       //
       const getData = async () => {
         return Promise.all(query.map( async (line) => {
           const ou = await ad.user(line.sAMAccountName).location();
-          if (line.sAMAccountName === '1234') {
-            console.log(line.userAccountControl);
-          }
           //
+          const active = () => {
+            if (line.userAccountControl == 514) return false;
+            if (typeof line.lockoutTime === 'undefined') return true;
+            if (line.lockoutTime != 0) return false;
+            return true;
+          }
           const result: User = {
             username: line.sAMAccountName,
             firstName: line.givenName,
@@ -28,7 +31,7 @@ export const listUser = async () : Promise<Users> => {
               return group.cn;
             }),
             orgUnit: ou,
-            active: line.userAccountControl == 514 ? false : true
+            active: active()
           };
           return result;
         }));
