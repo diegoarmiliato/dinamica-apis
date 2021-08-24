@@ -13,7 +13,6 @@ export const lockUser = async (username: string, active: boolean) : Promise<Resu
     if ( (!username)) {
       result.message = 'Usuário obrigatório';
     } else {
-      console.log(active);
       active ? await ad.user(username).enable() : await ad.user(username).disable(); 
       const msg = active ? 'desbloqueado' : 'bloqueado';
       result.message = `Usuário ${msg} com sucesso`;
