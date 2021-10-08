@@ -50,7 +50,7 @@ const login = async (req: Request, res: Response, next: NextFunction) : Promise<
 const logoff = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
   try {
     invalidateToken(req);
-    res.clearCookie('jid');
+    res.clearCookie('jid', { httpOnly: true, sameSite: 'none', secure: true });
     res.status(201).json({ message: 'Logged off'});
   } catch( error) {
     res.status(403).json({ message: 'Not authenticated' });

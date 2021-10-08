@@ -1,6 +1,5 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import cookieSession from 'cookie-session';
 import routes from './routes';
 import cors from 'cors';
 
@@ -9,14 +8,6 @@ const app = express();
 app.use(express.json());
 
 app.use(cookieParser());
-app.use(cookieSession({
-  name: 'session',
-  keys: [process.env.SECRET],
-  secure: true,
-  httpOnly: false,
-  sameSite: 'none',
-  maxAge: 5 * 1000 * 60 //24 hours
-}));
 
 const whiteList = process.env.CORS;
 
