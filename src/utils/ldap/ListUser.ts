@@ -22,7 +22,7 @@ export const listUser = async () : Promise<Users> => {
             if (typeof line.lockoutTime === 'undefined') return true;
             if (line.lockoutTime != 0) return false;
             return true;
-          }
+          };
           const result: User = {
             username: line.sAMAccountName,
             firstName: line.givenName,
