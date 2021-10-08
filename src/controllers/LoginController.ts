@@ -1,8 +1,7 @@
-import { Result } from './../models/Result';
-import { Authenticate } from './../utils/ldap/Authenticate';
+import { Authenticate } from '@utils/ldap/Authenticate';
 import { Request, Response, NextFunction } from 'express';
 import { Login } from '@models/Login';
-import { createAccessToken, createRefreshToken, getTokenOnRefresh, invalidateToken } from 'src/utils/middleware/auth';
+import { createAccessToken, createRefreshToken, getTokenOnRefresh, invalidateToken } from '@utils/middleware/auth';
 
 const { NODE_ENV } = process.env;
 
@@ -37,7 +36,7 @@ const login = async (req: Request, res: Response, next: NextFunction) : Promise<
       if (auth.status) {
         const token = createAccessToken(auth.username, auth.firstName, auth.lastName, auth.orgUnit);
         const refreshToken = createRefreshToken(auth.username, auth.firstName, auth.lastName, auth.orgUnit);
-        res.status(202).cookie('jid', refreshToken, { httpOnly: true }).json({token});
+        res.status(202).cookie('jid', refreshToken, { httpOnly: true, sameSite: 'none', secure: true }).json({token});
       } else {
         req.session = null;
         res.status(401).json({ message: 'Invalid username and password' });
@@ -66,7 +65,7 @@ const refresh = async (req: Request, res: Response, next: NextFunction) : Promis
       res.status(403).json({ message: 'Not authenticated' });
     }
     //
-    res.status(202).cookie('jid', refreshToken, { httpOnly: true }).json({token});
+    res.status(202).cookie('jid', refreshToken, { httpOnly: true, sameSite: 'none', secure: true }).json({token});
   } catch (error) {
     res.status(403).json({ message: 'Not authenticated' });
   }

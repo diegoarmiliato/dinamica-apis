@@ -1,7 +1,7 @@
 import express from 'express';
 import { login, logoff, refresh } from '@controllers/LoginController';
 import { getUsers, addUsers, lockUsers, changeUsersPass } from '@controllers/UsersController';
-import { auth } from './utils/middleware/auth';
+import { auth } from '@utils/middleware/auth';
 
 const routes = express.Router();
 
